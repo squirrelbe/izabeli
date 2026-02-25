@@ -9,6 +9,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.net.MalformedURLException;
+import java.util.Scanner;
 
 public class FormTest {
 
@@ -55,6 +56,25 @@ public class FormTest {
 
         String actualName = formPom.getTableDataByLabel("Student Name");
         Assert.assertEquals(actualName, FIRST_NAME + " "+ LAST_NAME);
+
+        String actualEmail = formPom.getTableDataByLabel("Student Email");
+        Assert.assertEquals(actualEmail, EMAIL);
+
+        String actualGender = formPom.getTableDataByLabel("Gender");
+        Assert.assertEquals(actualGender, GENDER);
+
+        String actualMobile = formPom.getTableDataByLabel("Mobile");
+        Assert.assertEquals(actualMobile, NUMBER);
+
+        String actualSubjects = formPom.getTableDataByLabel("Subjects");
+        Assert.assertEquals(actualSubjects, SUBJECT);
+
+        String actualHobbies = formPom.getTableDataByLabel("Hobbies");
+        Assert.assertEquals(actualHobbies, HOBBY);
+
+        String actualState = formPom.getTableDataByLabel("State and City");
+        Assert.assertEquals(actualState, STATE + " " + CITY);
+
         System.out.println("Finish test");
 
     }

@@ -68,16 +68,18 @@ jobs:
           path: ./video
 
       - name: Uploading Allure results
-          if: always()
-          uses: actions/upload-artifact@v4
-          with:
-
-      - name: Uploading logs
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: logs
-          path: ./logs
+         name: allure-results
+         path: ./target/allure-results
+
+      - name: Uploading Allure results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results
+          path: ./target/allure-results
 
 #      - name: Setup tmate session
 #        if: ${{ failure() }}

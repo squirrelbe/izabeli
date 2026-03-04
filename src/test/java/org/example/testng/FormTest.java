@@ -1,5 +1,6 @@
 package org.example.testng;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.example.pom.FormPom;
 import org.example.utils.Driver;
 import org.openqa.selenium.WebDriver;
@@ -13,6 +14,7 @@ import java.util.Scanner;
 
 public class FormTest {
 
+    private static final Logger logger = LogManager.getLogger(FormTest.class);
     static public WebDriver driver;
     static public String URL = "https://demoqa.com/";
     static public String FIRST_NAME = "Izabeli";
@@ -28,6 +30,7 @@ public class FormTest {
 
     @BeforeMethod
     public void beforeMethod() throws MalformedURLException {
+        logger.info("Start before method");
         //driver = Driver.getAutoLocalDriver();
         driver = Driver.getRemoteDriver();
         driver.manage().window().maximize();
@@ -35,7 +38,7 @@ public class FormTest {
 
     @Test
     public void formTest() {
-        System.out.println("Start test");
+        logger.info("Start test");
         driver.get(URL);
         FormPom formPom = new FormPom(driver);
         formPom.clickForms();
@@ -43,12 +46,14 @@ public class FormTest {
         formPom.closeAdvert();
         formPom.setFirstName(FIRST_NAME);
         formPom.setLastName(LAST_NAME);
+        logger.info("Set email");
         formPom.setEmail(EMAIL);
         formPom.setGender(GENDER);
         formPom.setNumber(NUMBER);
         formPom.setDate(DATE);
         formPom.setSubject(SUBJECT);
         formPom.setHobby(HOBBY);
+        logger.info("Set state");
         formPom.setState(STATE);
         formPom.setCity(CITY);
         formPom.clickSubmit();
@@ -75,12 +80,13 @@ public class FormTest {
         String actualState = formPom.getTableDataByLabel("State and City");
         Assert.assertEquals(actualState, STATE + " " + CITY);
 
-        System.out.println("Finish test");
+        logger.info("Finish test");
 
     }
 
     @AfterMethod
     public void afterMethod() {
+        logger.info("Start after method");
         driver.quit();
     }
 }
